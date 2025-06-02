@@ -16,7 +16,8 @@ BLEService controlService("000102030405060708090a0b0c0d0e0f");  // custom servic
 BLECharacteristic startStopChar("000102030405060708090a0b0c0d0e10", BLEWrite, 1);
 BLECharacteristic tempProfileChar("000102030405060708090a0b0c0d0e11", BLEWrite, 24);         // 6 pairs * 2 uint16 words each
 BLECharacteristic feedbackChar("000102030405060708090a0b0c0d0e12", BLERead | BLENotify, 4);  // temperature + force
-BLECharacteristic resetChar("000102030405060708090a0b0c0d0e13", BLEWrite, 1); //we might need to reset...
+BLECharacteristic tareChar("000102030405060708090a0b0c0d0e13", BLEWrite, 1); //we might need to tare...
+BLECharacteristic thresholdChar("000102030405060708090a0b0c0d0e14", BLEWrite, 4); //setting the threshold...
 
 
 // ===== Force Sensor =====
@@ -29,7 +30,7 @@ float profileTemp[6] = { 25,150,210,230,180,25 };
 bool running = false;
 bool profileStarted = false;
 unsigned long profileStartTime = 0;
-float forceThreshold = 1000.0;  // adjust per sensor
+float forceThreshold = 200000.0;  // adjust per sensor
 
 // ===== NTC Constants =====
 const float SERIES_RESISTOR = 1996.0;
@@ -49,7 +50,7 @@ bool lastConnectionStatus = false;
 float readNTCTemperature() {
   int adc = analogRead(NTC_PIN);
   Serial.print(adc);
-  Serial.print(": ");
+  Serial.print(", ");
   
   float resistance = SERIES_RESISTOR * ((980.0 / (adc-5)) - 1.0);
   float steinhart;
@@ -68,17 +69,17 @@ float getTargetTemp(unsigned long elapsed) {
       float dt = profileTime[i + 1] - profileTime[i];
       float tempDiff = profileTemp[i + 1] - profileTemp[i];
       Serial.print(i);
-      Serial.print(" ");
+      Serial.print(", ");
       Serial.print(tSec);
-      Serial.print(" ");
+      Serial.print(", ");
       Serial.print(profileTime[i + 1]);
-      Serial.print(" ");
+      Serial.print(", ");
       Serial.print(profileTemp[i + 1]);
-/*      Serial.print(" ");
+/*      Serial.print(", ");
       Serial.print(dt);
-      Serial.print(" ");
+      Serial.print(", ");
       Serial.print(tempDiff);*/
-      Serial.print("; ");
+      Serial.print(", ");
 
       return profileTemp[i] + (tSec - profileTime[i]) * tempDiff / dt;
     }
@@ -99,7 +100,7 @@ void controlHeater(float currentTemp) {
     analogWrite(HEATER_PWM_PIN, 0);
     heaterOn = false;
   }
-  Serial.print(heaterOn?"ON ":"OFF ");
+  Serial.print(heaterOn?"ON, ":"OFF, ");
 }
 
 void processBLE() {
@@ -118,8 +119,26 @@ void processBLE() {
     for (int i = 0; i < 6; i++) {
       profileTime[i] = data[i * 4]*256 + data[i * 4 + 1];             // in seconds, little endian
       profileTemp[i] = (data[i * 4 + 2]*256 + data[i * 4 + 3]) / 10.0;  // °C
+      Serial.print( profileTime[i]);
+      Serial.println(profileTemp[i]);
+
     }
   }
+
+  if (tareChar.written()){
+    Serial.println("Tare Written");
+    scale.tare();
+  }
+
+  if (thresholdChar.written()){
+    Serial.print("thresholdChar Written : ");
+    const uint8_t* data = thresholdChar.value();
+    
+    forceThreshold = (data[3] << 24) + (data[2] << 16) + (data[1] << 8) + data[0];
+    Serial.println(forceThreshold);
+   
+  }
+
 }
 
 void sendFeedback(float temp, float force) {
@@ -152,6 +171,8 @@ void setup() {
   controlService.addCharacteristic(startStopChar);
   controlService.addCharacteristic(tempProfileChar);
   controlService.addCharacteristic(feedbackChar);
+  controlService.addCharacteristic(tareChar);
+  controlService.addCharacteristic(thresholdChar);
 
   BLE.setLocalName("Martins-NTC-BLE-Controller");
   BLE.setAdvertisedService(controlService);
