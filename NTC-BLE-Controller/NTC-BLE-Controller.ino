@@ -52,7 +52,7 @@ float readNTCTemperature() {
   Serial.print(adc);
   Serial.print(", ");
   
-  float resistance = SERIES_RESISTOR * ((980.0 / (adc-5)) - 1.0);
+  float resistance = SERIES_RESISTOR * ((980.0 / (adc-5)) - 1.0); //adjust per temp sensor
   float steinhart;
   steinhart = resistance / NOMINAL_RESISTANCE;
   steinhart = log(steinhart);
@@ -100,7 +100,7 @@ void controlHeater(float currentTemp) {
     analogWrite(HEATER_PWM_PIN, 0);
     heaterOn = false;
   }
-  Serial.print(heaterOn?"ON, ":"OFF, ");
+  Serial.print(heaterOn?"1, ":"0, ");
 }
 
 void processBLE() {
