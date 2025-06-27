@@ -4,14 +4,18 @@ import static java.sql.DriverManager.println;
 
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.graphics.Color;
@@ -34,6 +38,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.MPPointD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,23 +48,35 @@ public class MainActivity extends AppCompatActivity {
 
     private LineChart lineChart;
 
-    //private List<String> xValues;
-
-
     TextView temperature;
+    TextView force;
+    TextView menubutton;
+    TextView startbutton;
+    TextView stopbutton;
+    Button sendbutton;
+    boolean connection;
+    List<Entry> entries;
+    LineDataSet dataSet;
+    LineData lineData;
+    int selected = -1;
+
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        connection = false;
         setContentView(R.layout.activity_main);
-        temperature = (TextView)findViewById(R.id.temp);
 
-        Intent intent = getIntent();
-        if(intent.getExtras() != null)
-        {
-            int temp = intent.getExtras().getInt("temp");
-            temperature.setText(temp+"");
-        }
+        temperature = (TextView)findViewById(R.id.temp);
+        force = (TextView)findViewById(R.id.force);
+        menubutton = (TextView)findViewById(R.id.menubutton);
+        startbutton = (TextView)findViewById(R.id.startbutton);
+        stopbutton = (TextView)findViewById(R.id.stopbutton);
+        sendbutton = (Button) findViewById(R.id.send);
+
+        startbutton.setVisibility(View.GONE);
+        stopbutton.setVisibility(View.GONE);
+        sendbutton.setVisibility(View.GONE);
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
@@ -88,18 +105,18 @@ public class MainActivity extends AppCompatActivity {
         lineChart = findViewById(R.id.chart);
 
         Description description = new Description();
-        Description description2 = new Description();
         description.setText("");
         lineChart.setDescription(description);
         lineChart.getAxisRight().setDrawLabels(true);
 
-        List<String> xValues = new ArrayList<String>(Arrays.asList("t0","t1","t2","t3","t4","t5","t6"));
+        List<String> xValues = new ArrayList<String>(Arrays.asList("t0","t1","t2","t3","t4","t5"));
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xValues));
         xAxis.setLabelCount(4);
         xAxis.setGranularity(1f);
+
 
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.setAxisMinimum(0f);
@@ -111,68 +128,49 @@ public class MainActivity extends AppCompatActivity {
         Legend legend = lineChart.getLegend();
         legend.setEnabled(false);
 
-        List<Entry> entries2 = new ArrayList<>();
-        entries2.add(new Entry(0, 0f));
-        entries2.add(new Entry(1, 20));
-        entries2.add(new Entry(2, 30));
-        entries2.add(new Entry(2, 50));
-        entries2.add(new Entry(3, 60));
-        entries2.add(new Entry(4, 30));
-        entries2.add(new Entry(4.5f, 0));
-        entries2.add(new Entry(5f, 0));
+        entries = new ArrayList<>();
+        entries.add(new Entry(0, 0));
+        entries.add(new Entry(1, 20));
+        entries.add(new Entry(2, 30));
+        entries.add(new Entry(3, 40));
+        entries.add(new Entry(4, 30));
+        entries.add(new Entry(5, 10));
 
-        LineDataSet dataSet2 = new LineDataSet(entries2, "");
-        dataSet2.setColor(Color.RED);
+        dataSet = new LineDataSet(entries, "");
+        //dataSet.setColor(Color.RED);
+        //dataSet.setHighlightEnabled(true);
+        //dataSet.setHighlightLineWidth(1f);
+        dataSet.setCircleRadius(15f);
+        dataSet.setCircleColor(Color.GREEN);
+        dataSet.setColor(Color.BLUE);
+        dataSet.setLineWidth(1f);
+        dataSet.setDrawValues(true);
+        dataSet.setDrawCircles(true);
+        //dataSet.setHighLightColor(Color.GREEN);
 
-        LineData lineData = new LineData(dataSet2);
-
+        lineData = new LineData(dataSet);
         lineChart.setData(lineData);
-        lineChart.setTouchEnabled(true);
-        lineChart.setDoubleTapToZoomEnabled(true);
         lineChart.setPinchZoom(false);
+        lineChart.setDragEnabled(true);
+        lineChart.zoomToCenter(1,5f);
+        lineChart.setTouchEnabled(true);
+
+        /*
+        lineChart.setDoubleTapToZoomEnabled(false);
         lineChart.setHighlightPerTapEnabled(true);
-        lineChart.setMaxHighlightDistance(5f);
+        lineChart.setMaxHighlightDistance(50f);
+        lineChart.setHighlightPerDragEnabled(false);
 
-        OnChartGestureListener gestureListener = new OnChartGestureListener() {
-            @Override
-            public void onChartGestureStart(MotionEvent motionEvent, ChartTouchListener.ChartGesture chartGesture) {
 
-            }
+        */
 
-            @Override
-            public void onChartGestureEnd(MotionEvent motionEvent, ChartTouchListener.ChartGesture chartGesture) {
+        lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        lineChart.getAxisRight().setEnabled(true);
+        lineChart.invalidate();
 
-            }
+        setupTouchListener();
 
-            @Override
-            public void onChartLongPressed(MotionEvent motionEvent) {
 
-            }
-
-            @Override
-            public void onChartDoubleTapped(MotionEvent motionEvent) {
-
-            }
-
-            @Override
-            public void onChartSingleTapped(MotionEvent motionEvent) {
-            }
-
-            @Override
-            public void onChartFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-
-            }
-
-            @Override
-            public void onChartScale(MotionEvent motionEvent, float v, float v1) {
-
-            }
-
-            @Override
-            public void onChartTranslate(MotionEvent motionEvent, float v, float v1) {
-
-            }
-        };
 
         final int[] highlightX = new int[2];
         final int[] toRemove = new int[1];
@@ -180,58 +178,12 @@ public class MainActivity extends AppCompatActivity {
         Button movebutton = (Button) findViewById(R.id.move);
         movebutton.setVisibility(View.GONE);
 
-        OnChartValueSelectedListener valueSelectedListener = new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry entry, Highlight highlight) {
-
-                movebutton.setVisibility(View.VISIBLE);
-                highlightX[0] = (int) highlight.getY();
-                toRemove[0] = (int) highlight.getX();
-
-                /*if (isFirst[0])
-                {
-                    highlightX[0] = (int) highlight.getY();
-                    toRemove[0] = (int) highlight.getX();
-                    isFirst[0] = !isFirst[0];
-                    entries2.remove(toRemove[0]);
-                }
-                else
-                {
-                    highlightX[1] = (int) highlight.getX();
-                    isFirst[0] = !isFirst[0];
-                    entries2.add(highlightX[1],new Entry(highlightX[1], highlightX[0]));
-                }
-                //lineChart.highlightValue(highlight,true);
-
-                /*temperature.setText(entry.getY()+"");
-                Log.i("a", entry.toString());
-                //entries2.set((int) entry.getX()-1, new Entry(entry.getX()-1, entry.getY()));
-                entries2.add(new Entry(0f, 200f));
-                LineDataSet dataSet2 = new LineDataSet(entries2, "2");
-                dataSet2.setColor(Color.RED);
-
-                LineData lineData = new LineData(dataSet2);
-
-                lineChart.setData(lineData);
-                lineChart.invalidate();*/
-
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        };
-        lineChart.setOnChartGestureListener(gestureListener);
-        lineChart.setOnChartValueSelectedListener(valueSelectedListener);
-        lineChart.invalidate();
-
-        CharSequence[] items = new CharSequence[xValues.size()];
+        /*CharSequence[] items = new CharSequence[xValues.size()];
         for (int i = 0; i < xValues.size(); i++)
         {
             items[i] = xValues.get(i);
 
-        }
+        }*/
         final int[] i = {6};
         movebutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -241,30 +193,167 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Move to:");
 
                 builder.setCancelable(true);
-                builder.setItems(items, new DialogInterface.OnClickListener() {
+               /* builder.setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        entries2.remove(toRemove[0]);
-                        entries2.add(which,new Entry (which, highlightX[0]));
-                    }});
+                        entries.remove(toRemove[0]);
+                        entries.add(which,new Entry (which, highlightX[0]));
+                    }});*/
 
                 builder.setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) -> {
 
                     dialog.cancel();
                 });
 
-                // Create the Alert dialog
                 AlertDialog alertDialog = builder.create();
-
-                // Show the Alert Dialog box
                 alertDialog.show();
             }
         });
-        Button menubutton = findViewById(R.id.menubutton);
+
+        sendbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float[] xvalues = new float[entries.size()];
+                float[] yvalues = new float[entries.size()];
+
+                for (int i = 0; i < entries.size(); i++) {
+                    xvalues[i] = entries.get(i).getX();
+                    yvalues[i] = entries.get(i).getY();
+                }
+
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                intent.putExtra("send",true);
+                intent.putExtra("xValues", xvalues);
+                intent.putExtra("yValues", yvalues);
+                startActivity(intent);
+
+            }
+        });
+        startbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                intent.putExtra("send",false);
+                intent.putExtra("start",1);
+                startActivity(intent);
+            }
+        });
+        stopbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                intent.putExtra("send",false);
+                intent.putExtra("start",2);
+                startActivity(intent);
+            }
+        });
         menubutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                if(connection) {
+                    Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                    intent.putExtra("connected",true);
+                    startActivity(intent);
+                }
+                else
+                {
+                    startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                }
             }
         });
 
+    }
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if ("ACTION_DATA_AVAILABLE".equals(intent.getAction())) {
+                double temp = intent.getDoubleExtra("temp", 0.0);
+                int forcevalue = intent.getIntExtra("force", 0);
+                connection = intent.getBooleanExtra("connection", false);
+                if(connection)
+                {
+                    menubutton.setTextColor(Color.GREEN);
+                    startbutton.setVisibility(View.VISIBLE);
+                    stopbutton.setVisibility(View.VISIBLE);
+                    sendbutton.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    menubutton.setTextColor(Color.RED);
+                    startbutton.setVisibility(View.GONE);
+                    stopbutton.setVisibility(View.GONE);
+                    sendbutton.setVisibility(View.GONE);
+                }
+                temperature.setText(temp+" °C");
+                force.setText(forcevalue+" N");
+            }
+        }
+    };
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter("ACTION_DATA_AVAILABLE");
+        LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupTouchListener() {
+        lineChart.setOnTouchListener(new View.OnTouchListener() {
+            float lastX, lastY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                float touchX = event.getX();
+                float touchY = event.getY();
+
+                MPPointD point = lineChart.getTransformer(YAxis.AxisDependency.LEFT).getValuesByTouchPoint(touchX, touchY);
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        selected = getClosestEntry(point.x, point.y);
+                        return selected != -1;
+
+                    case MotionEvent.ACTION_MOVE:
+                        if (selected != -1) {
+                            Entry entry = dataSet.getEntryForIndex(selected);
+                            entry.setX((float) point.x);
+                            entry.setY((float) point.y);
+                            lineChart.getData().notifyDataChanged();
+                            lineChart.notifyDataSetChanged();
+                            lineChart.invalidate();
+                            return true;
+                        }
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        selected = -1;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+    }
+
+    private int getClosestEntry(double x, double y) {
+        int closest = -1;
+        float minDistance = 1.0f;
+
+        for (int i = 0; i < dataSet.getEntryCount(); i++)
+        {
+            Entry e = dataSet.getEntryForIndex(i);
+            float dx = Math.abs(e.getX() - (float)x);
+            float dy = Math.abs(e.getY() - (float)y);
+            if (dx < minDistance && dy < minDistance)
+            {
+                closest = i;
+                break;
+            }
+        }
+        return closest;
     }
 }

@@ -35,11 +35,13 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class MenuActivity extends AppCompatActivity {
@@ -50,13 +52,23 @@ public class MenuActivity extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothLeScanner bluetoothLeScanner;
     private static final long SCAN_PERIOD = 3000;
-    private BluetoothGatt bluetoothGatt;
+    private static BluetoothGatt bluetoothGatt;
     Button scanbutton;
+    Boolean first;
+    BluetoothGattService service;
+    BluetoothManager bluetoothManager;
+    boolean connection;
+    private static BluetoothGattCharacteristic char11;
+    private static BluetoothGattCharacteristic startStopChar;
+    private static BluetoothGattCharacteristic tempProfileChar;
+    private static BluetoothGattCharacteristic tareChar;
+    private static BluetoothGattCharacteristic thresholdChar;
+
 
     @RequiresApi(api = Build.VERSION_CODES.S)
     @RequiresPermission(allOf = {Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN})
     protected void onCreate(Bundle savedInstanceState) {
-
+        first = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
@@ -66,7 +78,7 @@ public class MenuActivity extends AppCompatActivity {
 
         scanbutton = (Button) findViewById(R.id.scanbutton);
 
-        final BluetoothManager bluetoothManager =
+        bluetoothManager =
         (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = bluetoothManager.getAdapter();
         int REQUEST_ENABLE_BT = 1;
@@ -107,13 +119,70 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
     }
+    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    protected void onResume()
+    {
+        super.onResume();
+        boolean connection = getIntent().getBooleanExtra("connected", false);
+        boolean toSend =  getIntent().getBooleanExtra("send", false);
+        int start = getIntent().getIntExtra("start", 0);
+        float[] xValues = getIntent().getFloatArrayExtra("xValues");
+        float[] yValues = getIntent().getFloatArrayExtra("yValues");
 
+        if(start == 1)
+        {
+            startStopChar.setValue(new byte[] { (byte) 1});
+            bluetoothGatt.writeCharacteristic(startStopChar);
+            finish();
+        }
+        else if(start == 2)
+        {
+            startStopChar.setValue(new byte[] { (byte) 0});
+            bluetoothGatt.writeCharacteristic(startStopChar);
+            finish();
+        }
+
+        if(toSend)
+        {
+            float[] profileTime = xValues;
+            float[] profileTemp = yValues;
+            byte[] data = new byte[24];
+
+            for (int i = 0; i < 6; i++)
+            {
+                int time = (int) profileTime[i];
+                int temp = (int)(profileTemp[i] * 10);
+                data[i * 4] = (byte)((time >> 8) & 0xFF);
+                data[i * 4 + 1] = (byte)(time & 0xFF);
+                data[i * 4 + 2] = (byte)((temp >> 8) & 0xFF);
+                data[i * 4 + 3] = (byte)(temp & 0xFF);
+            }
+            tempProfileChar.setValue(data);
+            bluetoothGatt.writeCharacteristic(tempProfileChar);
+
+            scanbutton.setText("sent - Start Scan");
+            finish();
+        }
+        if (connection)
+        {
+            scanbutton.setText("connected - Start Scan");
+        }
+
+    }
+    public void setGatt(BluetoothGatt gatt) {
+        bluetoothGatt = gatt;
+    }
     private final BluetoothGattCallback bluetoothGattCallback = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 scanbutton.setText("connected");
+                connection = true;
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                connection = false;
+                Intent intent = new Intent("ACTION_DATA_AVAILABLE");
+                intent.putExtra("connection", false);
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                 scanbutton.setText("disconnected");
             }
         }
@@ -121,34 +190,80 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                BluetoothGattService service = gatt.getService(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e0f"));
+                service = gatt.getService(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e0f"));
                 BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e12"));
 
                 bluetoothGatt.setCharacteristicNotification(characteristic, true);
                 BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
                 descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                 gatt.writeDescriptor(descriptor);
+                setGatt(gatt);
+
             }
         }
+            @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
             @Override
             public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-                byte[] data = characteristic.getValue();
-                if (data != null) {
-                    ByteBuffer buffer = ByteBuffer.wrap(data);
-                    buffer.order(ByteOrder.LITTLE_ENDIAN);
-                    int value = buffer.getInt();
-                    Log.i( "cc", value+"");
+
+                    byte[] data = characteristic.getValue();
+
+                    if (data != null) {
+                        int tempRawUnsigned = ((data[0] & 0xFF) << 8) | (data[1] & 0xFF);
+                        int tempRawSigned = tempRawUnsigned >= 0x8000 ? tempRawUnsigned - 0x10000 : tempRawUnsigned;
+                        double temperature = tempRawSigned / 10.0;
+                        int force = ((data[2] & 0xFF) << 8) | (data[3] & 0xFF);
+
+                        Intent intent = new Intent("ACTION_DATA_AVAILABLE");
+                        intent.putExtra("temp", temperature);
+                        intent.putExtra("force", force);
+                        if(connection)
+                        {
+                            intent.putExtra("connection", true);
+                        }
+                        else
+                        {
+                            intent.putExtra("connection", false);
+                        }
+                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+                        if(first) {
+                            Intent activityintent = new Intent(MenuActivity.this, MainActivity.class);
+                            startActivity(activityintent);
+                            first = false;
+                        }
+
+                }
+                    /*
+                    byte[] dataToSend = new byte[]{15,20};
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("temp",value);
-                    startActivity(intent);
-                }
+                    BluetoothGattService service = gatt.getService(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e0f"));
+                    BluetoothGattCharacteristic newcharacteristic = service.getCharacteristic(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e11"));
+
+                    int props = newcharacteristic.getProperties();
+                    if ((props & BluetoothGattCharacteristic.PROPERTY_WRITE) > 0 ||
+                            (props & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) {
+
+                        newcharacteristic.setValue(dataToSend);
+                        bluetoothGatt.writeCharacteristic(newcharacteristic);
+                    } else {
+                        Log.e("BLE", "Characteristic does not support WRITE or WRITE_NO_RESPONSE");
+                    }
+*/
+
+
             }
+
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+               // Log.d("write", "successful" + characteristic.getUuid());
+            }
+
+        }
 
     };
     @RequiresPermission(Manifest.permission.BLUETOOTH_SCAN)
@@ -159,10 +274,10 @@ public class MenuActivity extends AppCompatActivity {
                     @RequiresPermission(allOf = {Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT})
                     @Override
                     public void run() {
-                        scanbutton.setText("Start Scan");
-                        scanbutton.setEnabled(false);
+
                         scanning[0] = false;
                         bluetoothLeScanner.stopScan( leScanCallback);
+                        scanbutton.setVisibility(View.GONE);
                         ListView listView = findViewById(R.id.deviceList);
                         listView.setAdapter(leDeviceListAdapter);
 
@@ -195,9 +310,16 @@ public class MenuActivity extends AppCompatActivity {
                                             throw new RuntimeException(e);
                                         }
 
-                                        BluetoothGattService service = bluetoothGatt.getService(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e0f"));
+                                        service = bluetoothGatt.getService(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e0f"));
                                         BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e12"));
+
+                                        startStopChar = service.getCharacteristic(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e10"));
+                                        tempProfileChar = service.getCharacteristic(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e11"));
+                                        tareChar = service.getCharacteristic(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e13"));
+                                        thresholdChar = service.getCharacteristic(UUID.fromString("00010203-0405-0607-0809-0a0b0c0d0e14"));
+
                                         bluetoothGatt.setCharacteristicNotification(characteristic, true);
+
                                         /*
                                         bluetoothGatt.readCharacteristic(characteristic);
                                         byte[] data = characteristic.getValue();
@@ -233,16 +355,17 @@ public class MenuActivity extends AppCompatActivity {
             } else {
                 scanning[0] = false;
                 bluetoothLeScanner.stopScan( leScanCallback);
+                scanbutton.setText("Not Scanning");
             }
 
     }
-
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
     public boolean connect(final String address)
     {
         try {
             final BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
             bluetoothGatt = device.connectGatt(this, false, bluetoothGattCallback);
+            //bluetoothManager.getInstance().setGatt(bluetoothGatt);
         }
         catch (IllegalArgumentException a)
         {
@@ -293,7 +416,6 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             ViewHolder viewHolder;
-            // General ListView optimization code.
             if (view == null) {
                 view = mInflator.inflate(R.layout.listitem_device, null);
                 viewHolder = new ViewHolder();

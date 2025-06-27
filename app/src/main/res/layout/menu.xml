@@ -40,7 +40,7 @@
         android:id="@+id/scanbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Scan"
+        android:text="disconnected - Start Scan"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
