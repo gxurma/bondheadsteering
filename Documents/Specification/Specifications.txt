@@ -1,0 +1,87 @@
+Heated Bondhead Tip With bondforce measurement: Preliminary Specification
+=========================================================================
+Dipl.-Ing. Martin Gyurkó <info@engyneer.at>
+v1.0, {docdate}: V1
+:toc:
+:toclevels: 3
+:toc-title: Inhaltsverzeichnis
+:icons: font
+:doctype: book
+:chapter-signifier: 
+:sectnums:
+:table-stripes: odd
+:table-caption: Tabelle 
+:imagesdir: Bilder
+:figure-caption: Bild
+:übergabedatum: 15.12.2024
+
+
+Goal
+----
+
+Purpose of the Heated Bondhead with bondforce measurement is to accurately monitor the force that is used during the bonding process in a pick and place machine.
+(for example in high-end machines, like Datacon APM machines etc.) and automatically start a heating profile to perform a bonding operation.
+
+Bonding ICs to any substrate with any anisotropic conducting adhesive or tape shall be possible.
+Bonding shall be happening with heat. Either heat activates a chemical reaction, or just liquifies the adhesive.
+
+
+
+Description
+-----------
+
+The bondhead is replacing the tip of the original bond head. So it is interchangeable with it. It needs heating and temperature measurement wiring led to it.
+If rapid cooling is needed, the cooling air carrying hoses are led directly to the target.
+
+Heating is done with a 2 point control algorithm, hysteresis is 0.5°C. 
+
+The maximum temperature that shall be reached is 230°C.
+
+A heating profile can be drawn and entered into the system with a tablet or mobile device.
+
+The extreme small dimensions and mass of the heat spreading and tip elements allow for extreme fast heat profiles.
+
+The low heat conducting titan plate prohibits flow of heat to the upper machine parts. 
+
+.Materials and dimensions used:
+[cols="1,1,1",options="header"]
+|=================
+| Assembly Part name | 	Material	| Size
+| Adapter Rund       | 	Steel		| 20 mm diameter x 15 mm 
+| Dehnhülse Rund 	 |  Steel		| 20 mm diameter x 20 mm 
+| Adapter Unten Rund | 	Titan		| 20 mm diameter x 2 mm
+| FlachheizerHeatspreader | 	copper	| 7 x 17 x 7.5 mm
+| Stempel			 | 	Steel or copper	| 11 x 7 x 7  mm
+|=================
+
+The boring in the heat spreader is M6.
+
+The assembly is built with M1 threaded screws.
+
+image::Assembly1.png[title="Bondhead assembly with heating element", width=75%, height=75%]
+
+image::Assembly2.png[title="Bondhead assembly with force sensor and heating element", width=75%, height=75%]
+
+
+Process
+-------
+
+. The user sets with the app on the mobile device the temperature profile.
+
+. The bondhead is attached to the Pick and place tip holder.
+
+. The machine picks up a part with the help of vacuum.
+
+. Machine puts the part to its target position.
+
+. Machine starts to squeese down onto the part, and the force measurement in the head detects the used force.
+
+. At a certain force the controller of the bondhead starts the temperature profile.
+
+. when finished with the profile, after certain time, pressure is released, and waited, till adhesive solidifies.
+
+Communication
+-------------
+
+The machine does not need to communicate with the controller. The controller measures the forces and decides when to start heat profile.
+
