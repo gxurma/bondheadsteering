@@ -13,7 +13,7 @@ const int LED_PIN = LED_BUILTIN;  // Built-in LED for BLE status
 const int PG12V = 3; // Power good 12V
 const int PG5V = 2; //Power good 5V
 
-
+float forceCalib = 0.01045391271119360209624150449; //0.01284816687185714717021640606917f; //1.3128564022809745982374287195438e-2f;
 
 // ===== BLE Services and Characteristics =====
 BLEService controlService("000102030405060708090a0b0c0d0e0f");  // custom service
@@ -101,7 +101,8 @@ void controlHeater(float currentTemp) {
   if (currentTemp < onThreshold && !heaterOn) {
     analogWrite(HEATER_PWM_PIN, 255);  // full power
     heaterOn = true;
-  } else if (currentTemp > offThreshold && heaterOn) {
+  } 
+  else if (currentTemp > offThreshold && heaterOn) {
     analogWrite(HEATER_PWM_PIN, 0);
     heaterOn = false;
   }
@@ -143,6 +144,7 @@ void processBLE() {
 
     forceThreshold = (data[3] << 24) + (data[2] << 16) + (data[1] << 8) + data[0];
     Serial.println(forceThreshold);
+
   }
 }
 
@@ -177,7 +179,7 @@ Serial.println("started4");
   pinMode(LED_PIN, OUTPUT);
 Serial.println("started5");
   
-  digitalWrite(LED_PIN, LOW);
+   digitalWrite(LED_PIN, LOW);
 Serial.println("started6");
   
   digitalWrite(HEATER_nENABLE_PIN, HIGH);
@@ -221,6 +223,8 @@ Serial.println("started8");
   BLE.advertise();
 
   Serial.println("BLE device is ready!");
+
+
 }
 
 void loop() {
@@ -240,7 +244,7 @@ void loop() {
   processBLE();
 
   float temp = readNTCTemperature();
-  float force = scale.get_units(1);
+  float force = scale.get_units(1) * forceCalib;
 
   if (running) {
     if (!profileStarted && force > forceThreshold) {
@@ -276,4 +280,36 @@ void loop() {
   Serial.println(" ");
 
   delay(100);
+  if( Serial.available() > 0 ){
+    char p = Serial.read();
+    if (p=='f'){
+      String input = Serial.readStringUntil('\n');  // Read until newline
+      float value = input.toFloat();               // Convert to float
+      Serial.print("You entered Calib Value: ");
+      Serial.println(value, 9);                    // Print with 4 decimal places
+      forceCalib=value;
+    }
+    if (p=='t'){
+      Serial.println("Tare Written");
+      scale.tare();     
+    }
+    if (p=='p'){
+      String input = Serial.readStringUntil('\n');  // Read until newline
+      float value = input.toFloat();               // Convert to float
+      Serial.print("Threshold Written");
+      Serial.println(value, 3);                    // Print with 4 decimal places
+      forceThreshold=value; //in millinewton
+    }
+    if (p=='o'){
+      String input = Serial.readStringUntil('\n');  // Read until newline
+      float value = input.toFloat();               // Convert to float
+      Serial.print("ON/OFF Written");
+      Serial.println(value, 1);                    // Print with 4 decimal places
+      running=(value>0) ;
+
+    }
+
+  }
+
 }
+
