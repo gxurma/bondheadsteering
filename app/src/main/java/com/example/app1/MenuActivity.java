@@ -129,6 +129,15 @@ public class MenuActivity extends AppCompatActivity {
         float[] xValues = getIntent().getFloatArrayExtra("xValues");
         float[] yValues = getIntent().getFloatArrayExtra("yValues");
 
+        boolean tare = getIntent().getBooleanExtra("tare", false);
+        byte tareValue = getIntent().getByteExtra("tareValue", (byte) 0);
+
+        if (tare) {
+            tareChar.setValue(new byte[]{tareValue});
+            bluetoothGatt.writeCharacteristic(tareChar);
+            finish();
+        }
+
         if(start == 1)
         {
             startStopChar.setValue(new byte[] { (byte) 1});
@@ -207,15 +216,24 @@ public class MenuActivity extends AppCompatActivity {
 
                     byte[] data = characteristic.getValue();
 
-                    if (data != null) {
-                        int tempRawUnsigned = ((data[0] & 0xFF) << 8) | (data[1] & 0xFF);
+                    if (data != null&& data.length >= 8) {
+                        boolean running =  ((data[0] & 0x02)!=0)?true:false;
+                        boolean profileStarted = ((data[0] & 0x01)!=0)?true:false;
+                        int tempRawUnsigned = ((data[1] & 0xFF) << 8) | (data[2] & 0xFF);
                         int tempRawSigned = tempRawUnsigned >= 0x8000 ? tempRawUnsigned - 0x10000 : tempRawUnsigned;
                         double temperature = tempRawSigned / 10.0;
-                        int force = ((data[2] & 0xFF) << 8) | (data[3] & 0xFF);
+                        int force = ((data[3] & 0xFF) << 24) | ((data[4] & 0xFF) << 16) | ((data[5] & 0xFF) << 8) | ((data[6] & 0xFF));
+                        int currentTime = ((data[7] & 0xFF) << 8) | (data[8] & 0xFF);
+//                        String logsFormat = String.format("%0.2f, %0.2f, %0.2f\n", temperature, force, currentTime);
+//                        Log.d("received ",logsFormat);
 
                         Intent intent = new Intent("ACTION_DATA_AVAILABLE");
                         intent.putExtra("temp", temperature);
                         intent.putExtra("force", force);
+                        intent.putExtra("currentTime", currentTime);
+                        intent.putExtra("running",running);
+                        intent.putExtra("profileStarted",profileStarted);
+
                         if(connection)
                         {
                             intent.putExtra("connection", true);

@@ -9,57 +9,95 @@
     tools:context=".MainActivity">
 
 
-    <RelativeLayout
-        android:layout_width="85dp"
-        android:layout_height="50dp"
-        android:background="@drawable/box"
+    <Button
+        android:id="@+id/tare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tare!"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415"
-        />
+        app:layout_constraintVertical_bias="0.699" />
 
     <RelativeLayout
-        android:layout_width="95dp"
-        android:layout_height="50dp"
+        android:layout_width="128dp"
+        android:layout_height="47dp"
         android:background="@drawable/box"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.922"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242">
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/forceThreshold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"
+            android:text="10 N"
+            android:textSize="30sp" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="85dp"
-        android:layout_height="50dp"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
         android:background="@drawable/box"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintHorizontal_bias="0.922"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242"
-        />
+        app:layout_constraintVertical_bias="0.234">
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="14dp"
+            android:text="0"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="128dp"
+        android:layout_height="49dp"
+        android:background="@drawable/box"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.367">
+
+        <TextView
+            android:id="@+id/force"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="4dp"
+            android:text="0 N"
+            android:textSize="30sp" />
+    </RelativeLayout>
 
     <Button
-         android:id="@+id/menubutton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="MENU"
-         android:textColor="#FF0000"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintHorizontal_bias="0.90"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:layout_constraintRight_toRightOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintVertical_bias="0.05" />
+        android:id="@+id/menubutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MENU"
+        android:textColor="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044" />
 
-     <Button
+    <Button
          android:id="@+id/startbutton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -111,18 +149,21 @@
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintVertical_bias="0.850" />
 
+
     <Button
-        android:id="@+id/move"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Move"
+        android:id="@+id/isRunning"
+        android:layout_width="105dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="8dp"
+        android:text="Stopped"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.923"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/menubutton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <Button
         android:id="@+id/send"
@@ -131,51 +172,11 @@
         android:text="Send"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911" />
-
-    <TextView
-         android:id="@+id/temp"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="0"
-         android:textSize="30sp"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintHorizontal_bias="0.75"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:layout_constraintRight_toRightOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintVertical_bias="0.242" />
-
-     <TextView
-         android:id="@+id/force"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="0 N"
-         android:textSize="30sp"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintHorizontal_bias="0.90"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:layout_constraintRight_toRightOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintVertical_bias="0.242" />
-
-
-    <TextView
-         android:id="@+id/temp3"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="10 N"
-         android:textSize="30sp"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintHorizontal_bias="0.90"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:layout_constraintRight_toRightOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.851" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"

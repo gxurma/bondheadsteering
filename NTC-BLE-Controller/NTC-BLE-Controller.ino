@@ -8,24 +8,29 @@ const int NTC_PIN = A0;  // Analog pin for NTC
 const int HX711_DOUT = 5;
 const int HX711_SCK = 4;
 const int HEATER_PWM_PIN = 6;  // PWM-capable
+const int HEATER_nENABLE_PIN = 7;
 const int LED_PIN = LED_BUILTIN;  // Built-in LED for BLE status
+const int PG12V = 3; // Power good 12V
+const int PG5V = 2; //Power good 5V
+
+
 
 // ===== BLE Services and Characteristics =====
 BLEService controlService("000102030405060708090a0b0c0d0e0f");  // custom service
 
 BLECharacteristic startStopChar("000102030405060708090a0b0c0d0e10", BLEWrite, 1);
-BLECharacteristic tempProfileChar("000102030405060708090a0b0c0d0e11", BLEWrite, 24);         // 6 pairs * 2 uint16 words each
-BLECharacteristic feedbackChar("000102030405060708090a0b0c0d0e12", BLERead | BLENotify, 4);  // temperature + force
-BLECharacteristic tareChar("000102030405060708090a0b0c0d0e13", BLEWrite, 1); //we might need to tare...
-BLECharacteristic thresholdChar("000102030405060708090a0b0c0d0e14", BLEWrite, 4); //setting the threshold...
+BLECharacteristic tempProfileChar("000102030405060708090a0b0c0d0e11", BLEWrite | BLERead  , 24);         // 6 pairs * 2 uint16 words each
+BLECharacteristic feedbackChar("000102030405060708090a0b0c0d0e12", BLERead | BLENotify, 9);  // profilestarted, running , temperature , force, currentTime
+BLECharacteristic tareChar("000102030405060708090a0b0c0d0e13", BLEWrite, 1);                 //we might need to tare...
+BLECharacteristic thresholdChar("000102030405060708090a0b0c0d0e14", BLEWrite, 4);            //setting the threshold...
 
 
 // ===== Force Sensor =====
 HX711 scale;
 
 // ===== Profile Data =====
-float profileTime[6] = { 1,2,3,4,5,6 };
-float profileTemp[6] = { 25,150,210,230,180,25 };
+float profileTime[6] = { 1, 4, 6, 8, 10, 12 };
+float profileTemp[6] = { 25, 150, 210, 230, 180, 25 };
 
 bool running = false;
 bool profileStarted = false;
@@ -49,10 +54,10 @@ bool lastConnectionStatus = false;
 // ===== Utilities =====
 float readNTCTemperature() {
   int adc = analogRead(NTC_PIN);
-  Serial.print(adc);
-  Serial.print(", ");
-  
-  float resistance = SERIES_RESISTOR * ((980.0 / (adc-5)) - 1.0); //adjust per temp sensor
+  //Serial.print(adc);
+  //Serial.print(", ");
+
+  float resistance = SERIES_RESISTOR * ((980.0 / (adc - 5)) - 1.0);  //adjust per temp sensor
   float steinhart;
   steinhart = resistance / NOMINAL_RESISTANCE;
   steinhart = log(steinhart);
@@ -75,7 +80,7 @@ float getTargetTemp(unsigned long elapsed) {
       Serial.print(profileTime[i + 1]);
       Serial.print(", ");
       Serial.print(profileTemp[i + 1]);
-/*      Serial.print(", ");
+      /*      Serial.print(", ");
       Serial.print(dt);
       Serial.print(", ");
       Serial.print(tempDiff);*/
@@ -84,7 +89,7 @@ float getTargetTemp(unsigned long elapsed) {
       return profileTemp[i] + (tSec - profileTime[i]) * tempDiff / dt;
     }
   }
-  profileStarted = false; //finished profile
+  profileStarted = false;  //finished profile
   return profileTemp[5];
 }
 
@@ -100,7 +105,7 @@ void controlHeater(float currentTemp) {
     analogWrite(HEATER_PWM_PIN, 0);
     heaterOn = false;
   }
-  Serial.print(heaterOn?"1, ":"0, ");
+  Serial.print(heaterOn ? "1, " : "0, ");
 }
 
 void processBLE() {
@@ -108,8 +113,11 @@ void processBLE() {
     running = startStopChar.value()[0];
     if (!running) {
       analogWrite(HEATER_PWM_PIN, 0);
+      digitalWrite(HEATER_nENABLE_PIN, HIGH);
       profileStarted = false;
-    }
+    }// else {
+      digitalWrite(HEATER_nENABLE_PIN, LOW);
+    //}
   }
 
   if (tempProfileChar.written()) {
@@ -117,55 +125,88 @@ void processBLE() {
     const uint8_t* data = tempProfileChar.value();
 
     for (int i = 0; i < 6; i++) {
-      profileTime[i] = data[i * 4]*256 + data[i * 4 + 1];             // in seconds, little endian
-      profileTemp[i] = (data[i * 4 + 2]*256 + data[i * 4 + 3]) / 10.0;  // °C
-      Serial.print( profileTime[i]);
+      profileTime[i] = data[i * 4] * 256 + data[i * 4 + 1];               // in seconds, little endian
+      profileTemp[i] = (data[i * 4 + 2] * 256 + data[i * 4 + 3]) / 10.0;  // °C
+      Serial.print(profileTime[i]);
       Serial.println(profileTemp[i]);
-
     }
   }
 
-  if (tareChar.written()){
+  if (tareChar.written()) {
     Serial.println("Tare Written");
     scale.tare();
   }
 
-  if (thresholdChar.written()){
+  if (thresholdChar.written()) {
     Serial.print("thresholdChar Written : ");
     const uint8_t* data = thresholdChar.value();
-    
+
     forceThreshold = (data[3] << 24) + (data[2] << 16) + (data[1] << 8) + data[0];
     Serial.println(forceThreshold);
-   
   }
-
 }
 
-void sendFeedback(float temp, float force) {
-  uint16_t t = (uint16_t)(temp * 10);
-  uint16_t f = (uint16_t)(force);
-  uint8_t buffer[4] = { (uint8_t)(t >> 8), (uint8_t)(t & 0xFF), (uint8_t)(f >> 8), (uint8_t)(f & 0xFF) };
-  feedbackChar.writeValue(buffer, 4);
+void sendFeedback(float temp, float force, unsigned long elapsed) {
+  uint16_t t = (uint16_t)(temp * 10); //temp in 0,1°C
+  uint32_t f = (uint32_t)(force); 
+  uint16_t e = (uint16_t)(elapsed/100); //convert to 0.1 s
+  uint8_t r = (running<<1 | profileStarted );
+  uint8_t buffer[9] = { r, (uint8_t)(t >> 8), (uint8_t)(t & 0xFF), (uint8_t)(f >> 24), (uint8_t)(f >> 16), (uint8_t)(f >> 8), (uint8_t)(f & 0xFF),  (uint8_t)(e >> 8), (uint8_t)(e & 0xFF) };
+  feedbackChar.writeValue(buffer, 9);
 }
 
 void setup() {
   Serial.begin(115200);
-  analogReadResolution(10);
-  pinMode(HEATER_PWM_PIN, OUTPUT);
-  analogWrite(HEATER_PWM_PIN, 0);
+ // while (!Serial); //
 
+  Serial.println("started");
+  //Serial.flush();
+
+  analogReadResolution(10);
+  Serial.println("started1");
+  
+  pinMode(HEATER_PWM_PIN, OUTPUT);
+  Serial.println("started2");
+  
+  pinMode(HEATER_nENABLE_PIN, OUTPUT);
+  Serial.println("started3");
+  
+  analogWrite(HEATER_PWM_PIN, 0);
+Serial.println("started4");
+  
   pinMode(LED_PIN, OUTPUT);
+Serial.println("started5");
+  
   digitalWrite(LED_PIN, LOW);
+Serial.println("started6");
+  
+  digitalWrite(HEATER_nENABLE_PIN, HIGH);
+Serial.println("started7");
 
   // Init HX711
   scale.begin(HX711_DOUT, HX711_SCK);
-  scale.set_scale();  // You can calibrate this
-  scale.tare();
+Serial.println("started10");
 
+  Serial.print("HX711 is ready: ");
+  Serial.println(scale.is_ready() ? "YES" : "NO");
+  while (!scale.is_ready())
+    if (!scale.is_ready()) {
+        Serial.println("HX711 not ready! Check wiring.");
+        delay(500);
+    }
+
+  
+  scale.set_scale();  // You can calibrate this
+Serial.println("started9");
+  
+ // scale.tare();
+Serial.println("started8");
+  
   // Init BLE
   if (!BLE.begin()) {
     Serial.println("BLE init failed!");
-    while (1);
+    while (1)
+      ;
   }
 
   controlService.addCharacteristic(startStopChar);
@@ -184,7 +225,7 @@ void setup() {
 
 void loop() {
 
-  unsigned long elapsed;
+  unsigned long elapsed=0;
   BLE.poll();
 
   BLEDevice central = BLE.central();
@@ -200,7 +241,6 @@ void loop() {
 
   float temp = readNTCTemperature();
   float force = scale.get_units(1);
-  sendFeedback(temp, force);
 
   if (running) {
     if (!profileStarted && force > forceThreshold) {
@@ -214,25 +254,26 @@ void loop() {
       controlHeater(temp);
     }
   }
+  sendFeedback(temp, force, elapsed);
 
   Serial.print(profileStarted);
   Serial.print(", ");
   Serial.print(running);
   Serial.print(", ");
   Serial.print(currentTarget);
-  Serial.print("; ");
- /* for (int i = 0; i < 6; i++) {
+  Serial.print(", ");
+  /* for (int i = 0; i < 6; i++) {
     Serial.print(profileTime[i]);
     Serial.print(" ");
     Serial.print(profileTemp[i]);
     Serial.print("; ");
-  }
+  }*/
   Serial.print(elapsed);
-  Serial.print(", ");*/
+  Serial.print(", ");
   Serial.print(temp);
   Serial.print(", ");
   Serial.print(force);
   Serial.println(" ");
 
-  delay(200);
+  delay(100);
 }
