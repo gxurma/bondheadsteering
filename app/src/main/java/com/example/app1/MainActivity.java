@@ -22,8 +22,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.util.Log;
+import android.view.inputmethod.EditorInfo;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     private LineChart lineChart;
     TextView temperature;
     TextView force;
+    TextView forceThreshold;
+    EditText editTextForceThreshold;
+    SeekBar seekBarForceTheshold;
     TextView menubutton;
     TextView startbutton;
     TextView stopbutton;
@@ -55,9 +61,12 @@ public class MainActivity extends AppCompatActivity {
     List<Entry> entries;
     LineDataSet dataSet;
     LineDataSet actualDataSet;
+    LineDataSet forceDataSet;
     LineData lineData;
     int selected = -1;
     boolean oldProfileStarted = false;
+
+
 
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
     @Override
@@ -68,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
         temperature = findViewById(R.id.temp);
         force = findViewById(R.id.force);
+        editTextForceThreshold = findViewById(R.id.editTextForceThreshold);
+        forceThreshold = findViewById(R.id.forceTheshold);
+
         menubutton = findViewById(R.id.menubutton);
         startbutton = findViewById(R.id.startbutton);
         stopbutton = findViewById(R.id.stopbutton);
@@ -75,12 +87,15 @@ public class MainActivity extends AppCompatActivity {
         tarebutton = findViewById(R.id.tare);
         isRunningButton = findViewById(R.id.isRunning);
 
+
         startbutton.setVisibility(View.GONE);
         stopbutton.setVisibility(View.GONE);
         sendbutton.setVisibility(View.GONE);
         tarebutton.setVisibility(View.GONE);
 
         isRunningButton.setText("Stopped");
+
+        forceThreshold.setText("20.0 N");
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
@@ -160,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
         dataSet = new LineDataSet(entries, "Soll-Werte");
         dataSet.setColor(Color.BLUE);
-        dataSet.setLineWidth(1f);
+        dataSet.setLineWidth(2f);
         dataSet.setCircleRadius(10f);
         dataSet.setCircleColor(Color.GREEN);
         dataSet.setDrawValues(true);
@@ -171,8 +186,18 @@ public class MainActivity extends AppCompatActivity {
         actualDataSet.setColor(Color.RED);
         actualDataSet.setDrawCircles(false);
         actualDataSet.setLineWidth(2f);
+        actualDataSet.setDrawValues(false);
+        actualDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
-        lineData = new LineData(dataSet, actualDataSet);
+        forceDataSet = new LineDataSet(new ArrayList<Entry>(), "Kraft-Ist-Wert");
+        forceDataSet.setColor(Color.GRAY);
+        forceDataSet.setDrawCircles(false);
+        forceDataSet.setLineWidth(1f);
+        forceDataSet.setDrawValues(false);
+        forceDataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
+
+
+        lineData = new LineData(dataSet, actualDataSet, forceDataSet);
         lineChart.setData(lineData);
         lineChart.invalidate();
 
@@ -223,8 +248,43 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("tareValue", (byte) 1);
             startActivity(intent);
         });
-    }
 
+// Reagiere auf "Done"-Taste der Tastatur
+        editTextForceThreshold.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                handleThresholdInput(editTextForceThreshold.getText().toString());
+                return true;
+            }
+            return false;
+        });
+
+// Reagiere auf Fokusverlust (z.B. wenn man außerhalb klickt)
+        editTextForceThreshold.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                handleThresholdInput(editTextForceThreshold.getText().toString());
+            }
+        });
+
+    }
+    private void handleThresholdInput(String input) {
+        input = input.trim();
+        if (input.isEmpty()) return;
+
+        try {
+            float newtonValue = Float.parseFloat(input);
+            int milliNewton = (int)(newtonValue * 1000);
+
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            intent.putExtra("send", false);
+            intent.putExtra("threshold", true);
+            intent.putExtra("thresholdValue", milliNewton);
+
+            forceThreshold.setText(String.format("%.2f N", newtonValue)); // falls TextView vorhanden
+            startActivity(intent);
+        } catch (NumberFormatException e) {
+            Log.e("EditText", "Ungültige Eingabe für Schwellenwert", e);
+        }
+    }
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -257,6 +317,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!oldProfileStarted & profileStarted) {
                     actualDataSet.clear();
+                    forceDataSet.clear();
                     oldProfileStarted = true;
                 }
                 if (connection) {
@@ -283,11 +344,13 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //
                 if (profileStarted) {
-                    actualDataSet.addEntry(new Entry(currentTime, (float) temp));;
+                    actualDataSet.addEntry(new Entry(currentTime, (float) temp));
+                    forceDataSet.addEntry(new Entry(currentTime, (float) ((float)forcevalue/1000.0f)));
                 }
 
                 //Log.d("currenttime", String.format("%f",currentTime));
                 actualDataSet.notifyDataSetChanged();
+                forceDataSet.notifyDataSetChanged();
                 lineData.notifyDataChanged();
                 lineChart.notifyDataSetChanged();
                 lineChart.invalidate();

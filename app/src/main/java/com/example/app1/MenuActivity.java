@@ -58,7 +58,6 @@ public class MenuActivity extends AppCompatActivity {
     BluetoothGattService service;
     BluetoothManager bluetoothManager;
     boolean connection;
-    private static BluetoothGattCharacteristic char11;
     private static BluetoothGattCharacteristic startStopChar;
     private static BluetoothGattCharacteristic tempProfileChar;
     private static BluetoothGattCharacteristic tareChar;
@@ -131,6 +130,20 @@ public class MenuActivity extends AppCompatActivity {
 
         boolean tare = getIntent().getBooleanExtra("tare", false);
         byte tareValue = getIntent().getByteExtra("tareValue", (byte) 0);
+
+        boolean threshold = getIntent().getBooleanExtra("threshold",false);
+        int thresholdValue = getIntent().getIntExtra("thresholdValue", 0);
+
+        if(threshold) {
+            byte[] value = new byte[4];
+            value[0] = (byte)(thresholdValue & 0xFF);
+            value[1] = (byte)((thresholdValue >> 8) & 0xFF);
+            value[2] = (byte)((thresholdValue >> 16) & 0xFF);
+            value[3] = (byte)((thresholdValue >> 24) & 0xFF);
+            thresholdChar.setValue(value);
+            bluetoothGatt.writeCharacteristic(thresholdChar);
+            finish();
+        }
 
         if (tare) {
             tareChar.setValue(new byte[]{tareValue});
