@@ -205,7 +205,7 @@ class MainWindow(QMainWindow):
     def slider_changed(self, value):
         newton = value / 10.0
         self.slider_label.setText(f"Kraft-Schwelle: {newton:.1f} N")
-        self.send_command(f"r{value}\n")
+        self.send_command(f"r{newton}\n")
 
     def select_com_port(self):
         dialog = COMDialog()
@@ -215,7 +215,7 @@ class MainWindow(QMainWindow):
                 if self.serial_port:
                     self.serial_port.close()
                 self.serial_port = serial.Serial(port, 115200, timeout=0.1)
-                self.timer.start(100)
+                self.timer.start(10)
                 self.debug_window.append_text(f"Verbunden mit: {port}")
 
     def read_serial_data(self):

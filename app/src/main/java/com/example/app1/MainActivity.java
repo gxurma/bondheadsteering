@@ -117,20 +117,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
         lineChart = findViewById(R.id.chart);
-     /*   lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-        lineChart.setScaleXEnabled(true);
-        lineChart.setScaleYEnabled(true);
-        lineChart.setPinchZoom(true);
-        lineChart.setAutoScaleMinMaxEnabled(true);*/
-
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(true);
         lineChart.setScaleXEnabled(true);
         lineChart.setScaleYEnabled(true);
-        lineChart.setDoubleTapToZoomEnabled(true);
+        lineChart.setPinchZoom(true);
         lineChart.setAutoScaleMinMaxEnabled(true);
-        lineChart.setVisibleXRangeMaximum(60f); // z.B. 60 Sekunden im Blick
+/*
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+        lineChart.setScaleXEnabled(true);
+        lineChart.setScaleYEnabled(true);
+     //   lineChart.setDoubleTapToZoomEnabled(true);
+        lineChart.setAutoScaleMinMaxEnabled(false);
+        lineChart.setVisibleXRangeMaximum(300f); // z.B. 60 Sekunden im Blick
+
+        lineChart.setVisibleXRangeMaximum(60f);
+        lineChart.setVisibleXRangeMinimum(10f);
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleXEnabled(true);
+        lineChart.setScaleYEnabled(false);
+        lineChart.setPinchZoom(true);
+*/
+    //    lineChart.setVisibleXRangeMinimum(5f);     // min. 5s sichtbar (Zoom-In-Grenze)
+        lineChart.setVisibleXRangeMaximum(300f);
+
 
         Description description = new Description();
         description.setText("Temperatur Sequenz");
@@ -140,11 +151,11 @@ public class MainActivity extends AppCompatActivity {
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextColor(Color.WHITE);
         xAxis.setLabelCount(4);
         xAxis.setGranularity(1f);
-        xAxis.setAxisMinimum(0f);
-//        xAxis.setAxisMaximum(30f);
-        xAxis.setTextColor(Color.WHITE);
+       // xAxis.setAxisMinimum(0f);
+       // xAxis.setAxisMaximum(300f); // z.B. 5 Minuten
 
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.setAxisMinimum(0f);
@@ -156,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
         YAxis rightAxis = lineChart.getAxisRight();
         rightAxis.setAxisMinimum(0f);
-        rightAxis.setAxisMaximum(250f);
+        rightAxis.setAxisMaximum(30f);
         rightAxis.setAxisLineWidth(2f);
         rightAxis.setAxisLineColor(Color.BLACK);
         rightAxis.setLabelCount(10);

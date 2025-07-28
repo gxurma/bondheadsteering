@@ -116,9 +116,9 @@ void processBLE() {
       analogWrite(HEATER_PWM_PIN, 0);
       digitalWrite(HEATER_nENABLE_PIN, HIGH);
       profileStarted = false;
-    }// else {
+    } else {
       digitalWrite(HEATER_nENABLE_PIN, LOW);
-    //}
+    }
   }
 
   if (tempProfileChar.written()) {
@@ -307,14 +307,22 @@ void loop() {
       Serial.print("ON/OFF Written: ");
       Serial.println(value, 1);                    // Print with 4 decimal places
       running=(value>0) ;
+      if (!running) {
+        analogWrite(HEATER_PWM_PIN, 0);
+        digitalWrite(HEATER_nENABLE_PIN, HIGH);
+        profileStarted = false;
+      } else {
+        digitalWrite(HEATER_nENABLE_PIN, LOW);
+      }
+
     }
 
     if (p=='p'){ //profile
      // String input = Serial.readStringUntil('\n');  // Read until newline
       Serial.print("Profile Written: ");
       int index = Serial.parseInt();
-      int timePoint = Serial.parseInt();
-      int tempPoint = Serial.parseInt();
+      float timePoint = Serial.parseFloat();
+      float tempPoint = Serial.parseFloat();
       Serial.print(index);
       Serial.print(" : ");
       Serial.print(timePoint);
