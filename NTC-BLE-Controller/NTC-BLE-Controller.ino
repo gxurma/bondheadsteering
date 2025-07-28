@@ -160,6 +160,7 @@ void sendFeedback(float temp, float force, unsigned long elapsed) {
 void setup() {
   Serial.begin(115200);
  // while (!Serial); //
+  Serial.setTimeout(100);
 
   Serial.println("started");
   //Serial.flush();
@@ -293,19 +294,37 @@ void loop() {
       Serial.println("Tare Written");
       scale.tare();     
     }
-    if (p=='p'){
+    if (p=='r'){
       String input = Serial.readStringUntil('\n');  // Read until newline
       float value = input.toFloat();               // Convert to float
-      Serial.print("Threshold Written");
+      Serial.print("Threshold Written: ");
       Serial.println(value, 3);                    // Print with 4 decimal places
-      forceThreshold=value; //in millinewton
+      forceThreshold=value; //in newton
     }
     if (p=='o'){
       String input = Serial.readStringUntil('\n');  // Read until newline
       float value = input.toFloat();               // Convert to float
-      Serial.print("ON/OFF Written");
+      Serial.print("ON/OFF Written: ");
       Serial.println(value, 1);                    // Print with 4 decimal places
       running=(value>0) ;
+    }
+
+    if (p=='p'){ //profile
+     // String input = Serial.readStringUntil('\n');  // Read until newline
+      Serial.print("Profile Written: ");
+      int index = Serial.parseInt();
+      int timePoint = Serial.parseInt();
+      int tempPoint = Serial.parseInt();
+      Serial.print(index);
+      Serial.print(" : ");
+      Serial.print(timePoint);
+      Serial.print(" s , ");
+      Serial.print(tempPoint);
+      Serial.println(" °C");
+      if ((0 <= index) && (index <=5 )){
+        profileTime[index] = timePoint;  // in seconds, little endian
+        profileTemp[index] = tempPoint;  // °C
+      }
 
     }
 
