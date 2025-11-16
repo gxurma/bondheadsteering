@@ -1,0 +1,26 @@
+Drill report for BondheadSteering.kicad_pcb
+Created on 2025-07-04T12:47:45+0200
+
+Copper Layer Stackup:
+    =============================================================
+    L1 :  F.Cu                      front
+    L2 :  B.Cu                      back
+
+
+Drill file 'BondheadSteering-PTH.drl' contains
+    plated through holes:
+    =============================================================
+    T1  0,300mm  0,0118"  (107 holes)
+    T2  0,950mm  0,0374"  (4 holes)
+    T3  1,000mm  0,0394"  (46 holes)
+    T4  3,500mm  0,1378"  (4 holes)
+
+    Total plated holes count 161
+
+
+Drill file 'BondheadSteering-NPTH.drl' contains
+    unplated through holes:
+    =============================================================
+    T1  1,780mm  0,0701"  (4 holes)
+
+    Total unplated holes count 4

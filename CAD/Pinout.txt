@@ -1,0 +1,16 @@
+
+
+Pinout
+
+1 Grün		E+ 	 					schwarz
+2 Braun		E-						braun
+3 Gelb		A-						rot
+4 Weiss		A+						gelb
+5 Grün		TempSens+ (3.3V)		grün
+6 Braun		TempSens- (Sens)		blau
+7 Gelb		Heater+  (+12V)			lila
+8 Weiss		Heater-	(Switched)		grau
+9			Heater+  (+12V)			weiss
+10			Heater-	(Switched)		rosa
+ 
+ 

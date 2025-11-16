@@ -1,0 +1,53 @@
+### Footprint positions - created on 2025-07-05T22:14:02+0200 ###
+### Printed by KiCad version 9.99.0-1132-g883a1f8d97
+## Unit = mm, Angle = deg.
+## Side : All
+# Ref     Val                          Package                                           PosX       PosY       Rot  Side
+A1        Arduino_Nano_RP2040_Connect  Arduino_Nano_WithMountingHoles                107.2400   -95.4600  180.0000  top
+C1        1u                           C_0603_1608Metric_Pad1.08x0.95mm_HandSolder    87.6300   -68.5800  180.0000  top
+C2        1u                           C_0603_1608Metric_Pad1.08x0.95mm_HandSolder   128.5188   -83.7700  180.0000  top
+C3        1u                           C_0603_1608Metric_Pad1.08x0.95mm_HandSolder   128.1113   -58.3700  180.0000  top
+C4        1u                           C_0603_1608Metric_Pad1.08x0.95mm_HandSolder   134.0063   -83.7700  180.0000  top
+C5        1u                           C_0603_1608Metric_Pad1.08x0.95mm_HandSolder   149.8600   -95.2500  -90.0000  top
+C6        1u                           C_0603_1608Metric_Pad1.08x0.95mm_HandSolder    88.0000   -94.1375   90.0000  top
+C7        100n                         C_0603_1608Metric                             100.8250  -116.8400    0.0000  top
+C8        10u                          C_0805_2012Metric_Pad1.18x1.45mm_HandSolder   102.8700  -112.7975  -90.0000  top
+C9        100n                         C_0603_1608Metric                              97.2950  -106.6800    0.0000  top
+C10       47u                          C_1206_3216Metric_Pad1.33x1.80mm_HandSolder   110.5000  -111.7589  -90.0000  top
+C11       150p                         C_0603_1608Metric                             121.9200  -112.5350  -90.0000  top
+C12       100n                         C_0603_1608Metric                             137.6550  -114.3000    0.0000  top
+C13       10u                          C_0805_2012Metric_Pad1.18x1.45mm_HandSolder   139.7000  -110.4900  -90.0000  top
+C14       100n                         C_0603_1608Metric                             132.8550  -104.7600    0.0000  top
+C15       47u                          C_1206_3216Metric_Pad1.33x1.80mm_HandSolder   153.2100  -108.2425  -90.0000  top
+C16       150p                         C_0603_1608Metric                             158.1000  -108.7214  -90.0000  top
+C17       47u                          C_1206_3216Metric_Pad1.33x1.80mm_HandSolder   149.8600  -108.2425  -90.0000  top
+C18       47u                          C_1206_3216Metric_Pad1.33x1.80mm_HandSolder   113.3000  -111.7589  -90.0000  top
+D2        STPS3L60U                    D_SMB_Handsoldering                           144.7800  -111.9200  -90.0000  top
+D3        STPS3L60U                    D_SMB_Handsoldering                           106.6800  -114.4600  -90.0000  top
+D4        STPS3L60U                    D_SMB_Handsoldering                           147.3200   -86.5200   90.0000  top
+J1        Conn_01x02_Pin               JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal       154.9400   -78.6600   90.0000  top
+J2        Conn_01x06_Socket            PinHeader_1x06_P2.54mm_Vertical               122.1688   -79.9600   90.0000  top
+J3        Conn_01x04_Socket            PinHeader_1x04_P2.54mm_Vertical               124.7088   -54.5600   90.0000  top
+J4        Conn_01x04_Pin               JST_XH_S4B-XH-A_1x04_P2.50mm_Horizontal       154.9400   -68.4200   90.0000  top
+J5        Conn_01x02_Pin               JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal       154.9400   -88.8600   90.0000  top
+J6        Conn_01x02_Pin               JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal       154.9400   -98.9800   90.0000  top
+L1        1uH                          L_0603_1608Metric_Pad1.05x0.95mm_HandSolder    88.0000   -98.1250  -90.0000  top
+L2        10u                          L_Taiyo-Yuden_NR-50xx_HandSoldering           104.1400  -105.4100    0.0000  top
+L3        10u                          L_Taiyo-Yuden_NR-50xx_HandSoldering           139.7000  -102.8700    0.0000  top
+Q1        AP90N02NF_NMOS               ONSemi_SO-8FL_488AA                           133.8750   -91.4400    0.0000  top
+R1        1961R                        R_0603_1608Metric_Pad0.98x0.95mm_HandSolder    87.9875   -65.0000  180.0000  top
+R2        100R                         R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   119.4125   -93.0000    0.0000  top
+R3        10k                          R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   124.0000   -92.0000   90.0000  top
+R4        47k                          R_0603_1608Metric_Pad0.98x0.95mm_HandSolder    91.4400  -110.1325  -90.0000  top
+R5        10k                          R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   116.8400  -113.3875   90.0000  top
+R6        3160                         R_0603_1608Metric_Pad0.98x0.95mm_HandSolder    95.6075  -116.8400  180.0000  top
+R7        47k                          R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   128.6275  -109.2200  -90.0000  top
+R8        10k                          R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   155.8000  -108.6214   90.0000  top
+R9        1100                         R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   133.7075  -114.3000  180.0000  top
+R10       100R                         R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   119.4125  -100.6875  -90.0000  top
+R11       10k                          R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   126.0875  -111.7600  180.0000  top
+R12       0R                           R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   148.4000  -114.4339   90.0000  top
+R13       0R                           R_0603_1608Metric_Pad0.98x0.95mm_HandSolder   110.0000  -116.9214   90.0000  top
+U1        ST1S14PHR                    TI_SO-PowerPAD-8                               97.1225  -112.3950    0.0000  top
+U2        ST1S14PHR                    TI_SO-PowerPAD-8                              134.3800  -109.8550    0.0000  top
+## End

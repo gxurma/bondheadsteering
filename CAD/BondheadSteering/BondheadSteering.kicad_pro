@@ -51,7 +51,13 @@
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -133,7 +139,7 @@
         "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.0,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -180,7 +186,17 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0,
+        0.5,
+        0.75,
+        1.0,
+        1.5,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -207,7 +223,24 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        },
+        {
+          "diameter": 0.8,
+          "drill": 0.5
+        },
+        {
+          "diameter": 1.0,
+          "drill": 0.8
+        },
+        {
+          "diameter": 1.5,
+          "drill": 1.0
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -496,8 +529,8 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
-      "pos_files": "",
+      "plot": "gbr/",
+      "pos_files": "./",
       "specctra_dsn": "",
       "step": "",
       "svg": "",
@@ -508,12 +541,22 @@
   "schematic": {
     "annotate_start_num": 0,
     "bom_export_filename": "${PROJECTNAME}.csv",
-    "bom_fmt_presets": [],
+    "bom_fmt_presets": [
+      {
+        "field_delimiter": ";",
+        "keep_line_breaks": false,
+        "keep_tabs": false,
+        "name": "jlcpcb",
+        "ref_delimiter": ",",
+        "ref_range_delimiter": "",
+        "string_delimiter": "\""
+      }
+    ],
     "bom_fmt_settings": {
-      "field_delimiter": ",",
+      "field_delimiter": ";",
       "keep_line_breaks": false,
       "keep_tabs": false,
-      "name": "CSV",
+      "name": "jlcpcb",
       "ref_delimiter": ",",
       "ref_range_delimiter": "",
       "string_delimiter": "\""
@@ -566,15 +609,9 @@
         },
         {
           "group_by": false,
-          "label": "JLCPCB",
-          "name": "JLCPCB",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Manuf",
           "name": "Manuf",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -586,18 +623,12 @@
           "group_by": false,
           "label": "Manufacturer Code",
           "name": "Manufacturer Code",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
           "label": "ManufacturerPartNum",
           "name": "ManufacturerPartNum",
-          "show": true
-        },
-        {
-          "group_by": false,
-          "label": "Part",
-          "name": "Part",
           "show": true
         },
         {
@@ -616,19 +647,19 @@
           "group_by": false,
           "label": "Sourcing",
           "name": "Sourcing",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
-          "label": "SourcingPartNum",
-          "name": "SourcingPartNum",
+          "label": "LCSC PN",
+          "name": "LCSC PN",
           "show": true
         },
         {
           "group_by": false,
           "label": "Umax",
           "name": "Umax",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
@@ -653,8 +684,8 @@
       "group_symbols": true,
       "include_excluded_from_bom": true,
       "name": "",
-      "sort_asc": true,
-      "sort_field": "Reference"
+      "sort_asc": false,
+      "sort_field": "Manuf"
     },
     "connection_grid_size": 50.0,
     "drawing": {

@@ -1,0 +1,3050 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1391</width>
+    <height>525</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Openpnp CAN Middleware</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="label_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>C</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX2f">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLabel" name="label_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Z</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5">
+       <widget class="QLCDNumber" name="lcdNumberDROPosZf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLCDNumber" name="lcdNumberDROPosXf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="smallDecimalPoint">
+         <bool>false</bool>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+        <property name="value" stdset="0">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QLCDNumber" name="lcdNumberDROPosC">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QLCDNumber" name="lcdNumberDROPosYf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="6">
+       <widget class="QLCDNumber" name="lcdNumberDROPosCf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLCDNumber" name="lcdNumberDROPosZ">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_6">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLCDNumber" name="lcdNumberDROPosY">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7" rowspan="3">
+       <widget class="QPushButton" name="pushButtonNotStop">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Not Stop</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>X2</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Homing</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="2" column="8">
+         <widget class="QPushButton" name="pushButtonMotorCAus">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Motor C an</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButtonInitX">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Init X Regler</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QPushButton" name="pushButtonInitX2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Init X2 Regler</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QPushButton" name="pushButtonInitY">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Init Y Regler</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="7">
+         <widget class="QPushButton" name="pushButtonInitZ">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Init Z Regler</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="8">
+         <widget class="QPushButton" name="pushButtonInitC">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Init C Regler</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QPushButton" name="pushButtonHomeX">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home X</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QPushButton" name="pushButtonHomeX2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home X2</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="6">
+         <widget class="QPushButton" name="pushButtonHomeY">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home Y</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="7">
+         <widget class="QPushButton" name="pushButtonHomeZ">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home Z</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="8">
+         <widget class="QPushButton" name="pushButtonHomeC">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home C</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QPushButton" name="pushButtonMotorXAus">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Motor X an</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QPushButton" name="pushButtonMotorX2Aus">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Motor X2 an</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="6">
+         <widget class="QPushButton" name="pushButtonMotorYAus">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Motor Y an</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="7">
+         <widget class="QPushButton" name="pushButtonMotorZAus">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Motor Z an</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButtonGoX21">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X2 100</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonReadPos">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Read Positions</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButtonGoX0Y0">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X0 Y0</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButtonGoZmax">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go Z 100000</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButtonGoC0">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go C 0 </string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="pushButtonGoX20">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X2 0</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pushButtonGoX22">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X2 300</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButtonGoX23">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X2 735</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButtonHomeAll">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home All</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Pos Testing</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="1" column="5">
+         <widget class="QSpinBox" name="spinBoxZ">
+          <property name="maximum">
+           <number>104000</number>
+          </property>
+          <property name="value">
+           <number>100000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" rowspan="3">
+         <widget class="QDial" name="Cset">
+          <property name="minimum">
+           <number>-4100</number>
+          </property>
+          <property name="maximum">
+           <number>4100</number>
+          </property>
+          <property name="pageStep">
+           <number>50</number>
+          </property>
+          <property name="sliderPosition">
+           <number>0</number>
+          </property>
+          <property name="invertedAppearance">
+           <bool>true</bool>
+          </property>
+          <property name="wrapping">
+           <bool>true</bool>
+          </property>
+          <property name="notchTarget">
+           <double>10.000000000000000</double>
+          </property>
+          <property name="notchesVisible">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
+         <widget class="QSpinBox" name="spinBoxVmax">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>200000</number>
+          </property>
+          <property name="value">
+           <number>20000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QLabel" name="label_10">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Y</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QSpinBox" name="spinBoxC">
+          <property name="minimum">
+           <number>-4100</number>
+          </property>
+          <property name="maximum">
+           <number>4100</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QSlider" name="Zset">
+          <property name="maximum">
+           <number>104000</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>100000</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBelow</enum>
+          </property>
+          <property name="tickInterval">
+           <number>10000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>X1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="2">
+         <widget class="QSpinBox" name="spinBoxX2">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimum">
+           <number>-4600</number>
+          </property>
+          <property name="maximum">
+           <number>7500</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QSlider" name="Yset">
+          <property name="minimum">
+           <number>-19260</number>
+          </property>
+          <property name="maximum">
+           <number>22080</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBelow</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3" rowspan="2">
+         <widget class="QSlider" name="X1set">
+          <property name="minimum">
+           <number>-16000</number>
+          </property>
+          <property name="maximum">
+           <number>16300</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <widget class="QSlider" name="Vmaxset">
+          <property name="maximum">
+           <number>200000</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>20000</number>
+          </property>
+          <property name="sliderPosition">
+           <number>20000</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QSpinBox" name="spinBoxY">
+          <property name="minimum">
+           <number>-19260</number>
+          </property>
+          <property name="maximum">
+           <number>22080</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QLabel" name="label_11">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Z</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4" rowspan="5" colspan="2">
+         <widget class="QPushButton" name="pushButtonGo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Vmax</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" rowspan="2" colspan="2">
+         <widget class="QSpinBox" name="spinBoxX">
+          <property name="minimum">
+           <number>-16000</number>
+          </property>
+          <property name="maximum">
+           <number>16300</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>C</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>X2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QSlider" name="X2set">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>880</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="invertedAppearance">
+           <bool>false</bool>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Actuators, Sensors</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="3" column="7">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Dispenstime 2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="7">
+         <widget class="QSpinBox" name="spinBoxDispensTime2">
+          <property name="suffix">
+           <string> ms</string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>3000</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>100</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" rowspan="3">
+         <widget class="QPushButton" name="pushButtonLight">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Light</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="10" rowspan="3">
+         <widget class="QPushButton" name="pushButtonDispensVac2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Dispens
+Vacuum
+Enable 2</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="4">
+         <widget class="QCheckBox" name="checkBoxZClampFront">
+          <property name="text">
+           <string>Zclamp Front</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QCheckBox" name="checkBoxTipTouch">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Tool Touch</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="12">
+         <widget class="QSpinBox" name="spinBoxBettSoll">
+          <property name="suffix">
+           <string> °C</string>
+          </property>
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>150</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QCheckBox" name="checkBoxJetterDown">
+          <property name="text">
+           <string>Jetter down</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QCheckBox" name="checkBoxJetterTouch">
+          <property name="text">
+           <string>Jetter Touch</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="11">
+         <widget class="QSpinBox" name="spinBoxThermodeSoll">
+          <property name="suffix">
+           <string> °C</string>
+          </property>
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>210</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="11" rowspan="3">
+         <widget class="QPushButton" name="pushButtonThermodeAn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Thermode
+An</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="8" rowspan="3">
+         <widget class="QPushButton" name="pushButtonWorkingVac">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Working
+Vac
+Enable</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="3">
+         <widget class="QPushButton" name="pushButtonJet">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Jet</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" rowspan="3">
+         <widget class="QPushButton" name="pushButtonZClampOff">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Z Clamp Off</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="12">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Soll Temperatur</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" rowspan="3">
+         <widget class="QPushButton" name="pushButtonReadSwitches">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Read
+Switches</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeatInterval">
+           <number>100</number>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="8">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>Thermode
+Temp</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="6">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Dispenstime 1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="6">
+         <widget class="QSpinBox" name="spinBoxDispensTime1">
+          <property name="suffix">
+           <string> ms</string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>3000</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>100</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="6" rowspan="2">
+         <widget class="QPushButton" name="pushButtonDispens1Shot">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Dispens 1
+Shot</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="12" rowspan="3">
+         <widget class="QPushButton" name="pushButtonBettAn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Bett
+An</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="pushButtonToolTipVacRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Tool
+Tip
+Vac
+Read</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="11">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Soll Temperatur</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5" rowspan="3">
+         <widget class="QPushButton" name="pushButtonToolTipVac">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Tool
+Tip
+Vac</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="9" rowspan="3">
+         <widget class="QPushButton" name="pushButtonDispensVac1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Dispens
+Vacuum
+Enable 1</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QPushButton" name="pushButtonDispens1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Dispens 1</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="7" rowspan="2">
+         <widget class="QPushButton" name="pushButtonDispens2Shot">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Dispens 2
+Shot</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QCheckBox" name="checkBoxZClampBack">
+          <property name="text">
+           <string>Zclamp Back</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QCheckBox" name="checkBoxJetterUp">
+          <property name="text">
+           <string>Jetter Up</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="10">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>Bett
+Temp</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4" rowspan="3">
+         <widget class="QPushButton" name="pushButtonToolChangerVac">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Tool
+Changer
+ Vac</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" rowspan="3">
+         <widget class="QPushButton" name="pushButtonJetterDown">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Jetter down</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="7">
+         <widget class="QPushButton" name="pushButtonDispens2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Dispens 2</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="9" colspan="4">
+         <widget class="QProgressBar" name="progressBarBettTemp">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>200</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="format">
+           <string>%v °C</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="4">
+         <widget class="QProgressBar" name="progressBarToolTipVacRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
+          <property name="value">
+           <number>950</number>
+          </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
+          <property name="format">
+           <string>%v mBar</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="5" colspan="4">
+         <widget class="QProgressBar" name="progressBarThermodeTemp">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>200</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="format">
+           <string>%v °C</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="9" rowspan="2">
+         <widget class="QPushButton" name="pushButtonReadTemps">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Read
+Temps</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeatInterval">
+           <number>100</number>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>Joystic</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_StepsXY">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>0.001000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.001000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Vmax (µm/s)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QPushButton" name="pushButton_YM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Y -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="6">
+         <widget class="QPushButton" name="pushButton_ZM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Z -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButton_XM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>X -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QPushButton" name="pushButton_ZP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Z +</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButton_YP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Y +</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="8" rowspan="4">
+         <widget class="QSlider" name="verticalSlider_StepsZ">
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>14</number>
+          </property>
+          <property name="pageStep">
+           <number>5</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="pushButton_XP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>X +</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4" rowspan="4">
+         <widget class="QSlider" name="verticalSlider_StepsXY">
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>15</number>
+          </property>
+          <property name="pageStep">
+           <number>5</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_StepsZ">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>0.001000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>50.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.001000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QSpinBox" name="spinBoxVmaxf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>200000</number>
+          </property>
+          <property name="value">
+           <number>20000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pushButtonJoysticMode">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Joystic mode</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2" colspan="7">
+         <widget class="QSlider" name="Vmaxsetf">
+          <property name="maximum">
+           <number>200000</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>20000</number>
+          </property>
+          <property name="sliderPosition">
+           <number>20000</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QPushButton" name="pushButton_CM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>C -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="7">
+         <widget class="QPushButton" name="pushButton_CP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>C+</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>Positionen</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="6" column="1">
+         <widget class="QPushButton" name="pushButton_ZeileM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>- Zeile</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton_Start">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Start</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QPushButton" name="pushButton_ZeileP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>+ Zeile</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="9">
+         <widget class="QTableWidget" name="tableWidget_Positionen">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="rowCount">
+           <number>15</number>
+          </property>
+          <property name="columnCount">
+           <number>6</number>
+          </property>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Grindfast</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Grindslow</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Polierfast</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Polierslow</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Tupfenfast</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Tupfenslow</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Camera 1</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Camera 2</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Camera 3</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>ParkenFast</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>X</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Z</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Speed</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Pause</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Dispensen</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="pushButton_Capture">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Capture</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButton_Pause">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Pause</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="pushButton_GoToPos">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go to  Pos</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QPushButton" name="pushButton_Load">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Laden</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QPushButton" name="pushButton_Save">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Speichern</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton_Stop">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Stop</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Special</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButtonSendResetCommand">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>20</y>
+          <width>181</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Send Reset Command
+to Smoothieboard</string>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="plainTextEditResetCommand">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>711</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="plainText">
+         <string>M112
+M999</string>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="plainTextEditGcode">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>80</y>
+          <width>711</width>
+          <height>221</height>
+         </rect>
+        </property>
+        <property name="plainText">
+         <string>G1 X-10 Y-10 F2000
+M400
+G1 Y10 F2000
+M400
+G1 X10 F2000
+M400
+G1 Y-10 F2000
+M400
+G1 X-10 F2000
+M400
+G1 Z0 F2000
+M400
+</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonSendGcode">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>80</y>
+          <width>181</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Send Gcode
+to Servos</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCaptureCoordOffset">
+        <property name="geometry">
+         <rect>
+          <x>920</x>
+          <y>80</y>
+          <width>181</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Capture and Set
+Coord Offset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonZeroCoordOffset">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>190</y>
+          <width>181</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Zero
+Coord Offset</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonSetCoordOffset">
+        <property name="geometry">
+         <rect>
+          <x>920</x>
+          <y>190</y>
+          <width>181</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Set
+Coord Offset</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="spinBoxOffsetX">
+        <property name="geometry">
+         <rect>
+          <x>1159</x>
+          <y>80</y>
+          <width>101</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <number>-16300</number>
+        </property>
+        <property name="maximum">
+         <number>16300</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="spinBoxOffsetY">
+        <property name="geometry">
+         <rect>
+          <x>1160</x>
+          <y>110</y>
+          <width>101</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <number>-22080</number>
+        </property>
+        <property name="maximum">
+         <number>22080</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="spinBoxOffsetZ">
+        <property name="geometry">
+         <rect>
+          <x>1160</x>
+          <y>140</y>
+          <width>101</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <number>-104000</number>
+        </property>
+        <property name="maximum">
+         <number>104000</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_19">
+        <property name="geometry">
+         <rect>
+          <x>1130</x>
+          <y>80</y>
+          <width>18</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_20">
+        <property name="geometry">
+         <rect>
+          <x>1130</x>
+          <y>110</y>
+          <width>18</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_21">
+        <property name="geometry">
+         <rect>
+          <x>1130</x>
+          <y>140</y>
+          <width>18</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Z</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="spinBoxOffsetC">
+        <property name="geometry">
+         <rect>
+          <x>1160</x>
+          <y>170</y>
+          <width>101</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <number>-4100</number>
+        </property>
+        <property name="maximum">
+         <number>4100</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_22">
+        <property name="geometry">
+         <rect>
+          <x>1130</x>
+          <y>170</y>
+          <width>18</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>C</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonUseOffset">
+        <property name="geometry">
+         <rect>
+          <x>1110</x>
+          <y>10</y>
+          <width>171</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Use Offset</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1391</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionExit"/>
+    <addaction name="actionSave_Presets"/>
+    <addaction name="actionLoad_Presets"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionHelp"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionSave_Presets">
+   <property name="text">
+    <string>Save presets</string>
+   </property>
+  </action>
+  <action name="actionLoad_Presets">
+   <property name="text">
+    <string>Load Presets</string>
+   </property>
+  </action>
+  <action name="actionNotstop1">
+   <property name="text">
+    <string>actionNotstop1</string>
+   </property>
+   <property name="shortcut">
+    <string>Space</string>
+   </property>
+  </action>
+  <action name="actionNotstop2">
+   <property name="text">
+    <string>actionNotstop2</string>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>pushButtonReadPos</tabstop>
+  <tabstop>pushButtonInitX</tabstop>
+  <tabstop>pushButtonInitX2</tabstop>
+  <tabstop>pushButtonInitY</tabstop>
+  <tabstop>pushButtonInitZ</tabstop>
+  <tabstop>pushButtonInitC</tabstop>
+  <tabstop>pushButtonHomeX</tabstop>
+  <tabstop>pushButtonHomeX2</tabstop>
+  <tabstop>pushButtonHomeY</tabstop>
+  <tabstop>pushButtonHomeZ</tabstop>
+  <tabstop>pushButtonHomeC</tabstop>
+  <tabstop>pushButtonMotorXAus</tabstop>
+  <tabstop>pushButtonMotorX2Aus</tabstop>
+  <tabstop>pushButtonMotorYAus</tabstop>
+  <tabstop>pushButtonMotorZAus</tabstop>
+  <tabstop>pushButtonMotorCAus</tabstop>
+  <tabstop>pushButtonNotStop</tabstop>
+  <tabstop>spinBoxC</tabstop>
+  <tabstop>Cset</tabstop>
+  <tabstop>spinBoxY</tabstop>
+  <tabstop>Yset</tabstop>
+  <tabstop>spinBoxZ</tabstop>
+  <tabstop>Zset</tabstop>
+  <tabstop>spinBoxX</tabstop>
+  <tabstop>X1set</tabstop>
+  <tabstop>spinBoxX2</tabstop>
+  <tabstop>X2set</tabstop>
+  <tabstop>spinBoxVmax</tabstop>
+  <tabstop>Vmaxset</tabstop>
+  <tabstop>pushButtonGo</tabstop>
+  <tabstop>pushButtonJet</tabstop>
+  <tabstop>pushButtonJetterDown</tabstop>
+  <tabstop>pushButtonZClampOff</tabstop>
+  <tabstop>pushButtonLight</tabstop>
+  <tabstop>pushButtonToolChangerVac</tabstop>
+  <tabstop>pushButtonToolTipVac</tabstop>
+  <tabstop>pushButtonDispens1</tabstop>
+  <tabstop>pushButtonDispens1Shot</tabstop>
+  <tabstop>pushButtonDispens2</tabstop>
+  <tabstop>pushButtonDispens2Shot</tabstop>
+  <tabstop>pushButtonWorkingVac</tabstop>
+  <tabstop>pushButtonDispensVac1</tabstop>
+  <tabstop>pushButtonDispensVac2</tabstop>
+  <tabstop>pushButtonThermodeAn</tabstop>
+  <tabstop>pushButtonBettAn</tabstop>
+  <tabstop>pushButtonReadSwitches</tabstop>
+  <tabstop>pushButtonToolTipVacRead</tabstop>
+  <tabstop>checkBoxJetterUp</tabstop>
+  <tabstop>checkBoxJetterDown</tabstop>
+  <tabstop>checkBoxJetterTouch</tabstop>
+  <tabstop>checkBoxTipTouch</tabstop>
+  <tabstop>checkBoxZClampBack</tabstop>
+  <tabstop>checkBoxZClampFront</tabstop>
+  <tabstop>spinBoxDispensTime1</tabstop>
+  <tabstop>spinBoxDispensTime2</tabstop>
+  <tabstop>spinBoxThermodeSoll</tabstop>
+  <tabstop>spinBoxBettSoll</tabstop>
+  <tabstop>pushButton_YP</tabstop>
+  <tabstop>doubleSpinBox_StepsXY</tabstop>
+  <tabstop>verticalSlider_StepsXY</tabstop>
+  <tabstop>pushButton_ZP</tabstop>
+  <tabstop>verticalSlider_StepsZ</tabstop>
+  <tabstop>pushButton_XM</tabstop>
+  <tabstop>pushButtonJoysticMode</tabstop>
+  <tabstop>pushButton_XP</tabstop>
+  <tabstop>pushButton_YM</tabstop>
+  <tabstop>pushButton_CM</tabstop>
+  <tabstop>doubleSpinBox_StepsZ</tabstop>
+  <tabstop>pushButton_CP</tabstop>
+  <tabstop>pushButton_ZM</tabstop>
+  <tabstop>spinBoxVmaxf</tabstop>
+  <tabstop>Vmaxsetf</tabstop>
+  <tabstop>tableWidget_Positionen</tabstop>
+  <tabstop>pushButton_Start</tabstop>
+  <tabstop>pushButton_Pause</tabstop>
+  <tabstop>pushButton_Stop</tabstop>
+  <tabstop>pushButton_GoToPos</tabstop>
+  <tabstop>pushButton_Capture</tabstop>
+  <tabstop>pushButton_ZeileP</tabstop>
+  <tabstop>pushButton_ZeileM</tabstop>
+  <tabstop>pushButton_Load</tabstop>
+  <tabstop>pushButton_Save</tabstop>
+  <tabstop>tabWidget</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Cset</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxC</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>208</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>114</x>
+     <y>193</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxC</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Cset</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>114</x>
+     <y>193</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>251</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxZ</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Zset</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1370</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1324</x>
+     <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Zset</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxZ</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1324</x>
+     <y>356</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1370</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxY</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Yset</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1284</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1242</x>
+     <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Yset</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxY</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1242</x>
+     <y>356</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1284</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxX</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>X1set</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>134</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>595</x>
+     <y>402</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>X1set</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxX</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>595</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>134</x>
+     <y>398</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxX2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>X2set</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>134</x>
+     <y>438</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>591</x>
+     <y>442</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>X2set</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxX2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>595</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>134</x>
+     <y>438</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxVmax</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Vmaxset</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>614</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Vmaxset</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxVmax</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>595</x>
+     <y>482</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>139</x>
+     <y>478</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorXAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1380</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorX2Aus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1380</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>629</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorYAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1380</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>982</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorZAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1380</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1176</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorCAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1380</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1370</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxVmaxf</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Vmaxsetf</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>143</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>780</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Vmaxsetf</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxVmaxf</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1004</x>
+     <y>482</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>478</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNotstop1</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButtonNotStop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1266</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNotstop2</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButtonNotStop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1266</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
